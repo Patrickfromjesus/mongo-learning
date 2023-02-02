@@ -1,16 +1,17 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb')
 
-let connect;
+let db;
 
-module.exports = {
-  connectDb: async (callback) => {
-    try {
-      const client = await MongoClient.connect('mongodb://localhost:27017/teste');
-      connect = client.db();
-      return callback();
-    } catch (error) {
-      return callback(error); 
-    }
-  },
-  getDb: () => connect,
+const connectDb = async (call) => {
+  try {
+    const client = await MongoClient.connect('mongodb://localhost:8080/class');
+    db = client.db();
+    return call();
+  } catch (error) {
+    return call(error); 
+  }
 }
+
+const getDb = () => db;
+
+module.exports = { connectDb, getDb };

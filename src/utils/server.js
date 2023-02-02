@@ -1,3 +1,6 @@
 const app = require('./app');
+require('dotenv/config');
 
-app.listen(3000, () => console.log('Open at 3000'));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`Open at port: ${PORT}`));

@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  mongo:
+    container_name: mongo_container
+    image: mongo
+    ports:
+      - 8080:27017
