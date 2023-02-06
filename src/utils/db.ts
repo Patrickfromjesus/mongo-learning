@@ -1,16 +1,12 @@
-import { MongoClient, Db, MongoError } from 'mongodb';
+import { Db, MongoClient } from 'mongodb'
 
-let connect: Db;
+let db: Db;
 
 export default {
-  connectDb: async (call: (err?: string) => void) => {
-    try {
-      const client = await MongoClient.connect('mongodb://localhost:27017');
-      connect = client.db('teste');
-      return call(); 
-    } catch (error) {
-      return call(error as string);
-    }
+  connectDb: (): Db => {
+    const client = new MongoClient('mongodb://localhost:27017');
+    db = client.db('teste');
+    return db;
   },
-  getDb: () => connect,
+  getDb: () => db,
 }
