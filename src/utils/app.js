@@ -1,4 +1,5 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const { connectDb, getDb } = require('./db');
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(express.json());
 app.get('/test', async (req, res) => {
   try {
     const data = [];
-    await db.collection('superheroes').find().forEach((user) => data.push(user));
+    await db.collection('users').find().limit(3).forEach(e => data.push(e));
     return res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error });
@@ -36,7 +37,7 @@ app.get('/test', async (req, res) => {
   try {
     const data = await db.collection('superheroes').countDocuments({ 'aspects.height': { $lt: 180 } });
     return res.status(200).json(data);
-  } catch (error) {
+  } catch (error) {{ $set: { topics: ["databases", "MongoDB"] } },
     res.status(500).json({ message: error });
   }
 }); */
